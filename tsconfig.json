@@ -1,13 +1,11 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
-    "baseUrl" : "src",
+    "baseUrl" : ".",
     "paths": {
       "components/": ["src/components/*"],
       "config/": ["src/config/*"],
       "styles/": ["src/styles/*"],
       "utils/": ["src/utils/*"],
-      "models/": ["src/models/*"]
     },
     "noEmit": true,
     "allowJs": true,
