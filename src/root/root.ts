@@ -11,5 +11,3 @@ const EXAMPLE_ORGANIZATION = 'ktsstudio';
 //     }).then((result: ApiResponse<RepoItem[], any>) => {
 //         console.log(result);
 // })
-
-

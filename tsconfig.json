@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl" : "src",
+    "baseUrl": "src",
     "paths": {
       "components/": ["/components/*"],
       "config/": ["/config/*"],
       "styles/": ["/styles/*"],
-      "utils/": ["/utils/*"],
+      "utils/": ["/utils/*"]
     },
     "noEmit": true,
     "allowJs": true,
@@ -18,7 +18,7 @@
     "moduleResolution": "node",
     "jsx": "react",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true
   },
 
   "include": ["src/**/*"],

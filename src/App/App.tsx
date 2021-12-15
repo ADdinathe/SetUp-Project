@@ -1,10 +1,8 @@
 import React from 'react';
-import PhoneMask from "components/PhoneMask";
-
+import PhoneMask from 'components/PhoneMask';
 
 function App() {
-    return <PhoneMask />
-
+  return <PhoneMask />;
 }
 
 export default App;

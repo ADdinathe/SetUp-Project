@@ -1,9 +1,9 @@
 export enum Meta {
-  initial = "initial",//kappa
+  initial = 'initial', //kappa
 
-  loading = "loading",//kappa
+  loading = 'loading', //kappa
 
-  error = "error",//Done NOT Well
+  error = 'error', //Done NOT Well
 
-  success = "success",//Done well
+  success = 'success', //Done well
 }
