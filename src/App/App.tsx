@@ -1,9 +1,10 @@
 import React from 'react';
+import PhoneMask from "components/PhoneMask";
 
 
 function App() {
-    return (<div>Hello World!
-    </div>)
+    return <PhoneMask />
+
 }
 
 export default App;
