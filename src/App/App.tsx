@@ -2,7 +2,7 @@ import React from 'react';
 import PhoneMask from 'components/PhoneMask';
 
 function App() {
-  return <PhoneMask />;
+  return <PhoneMask disabled={false} />;
 }
 
 export default App;
