@@ -1,7 +1,6 @@
 import styled, {css} from 'styled-components';
 import './PhoneMask.css'
 
-
 export const StyledInput = styled.input<{ error?: boolean, success?: boolean }>`
   -moz-appearance: textfield;
   font-size: 14px;
@@ -15,7 +14,7 @@ export const StyledInput = styled.input<{ error?: boolean, success?: boolean }>`
   background: #FFFFFF;
   border-radius: 8px;
   border: 1px solid gray;
-
+  
   &:hover {
     border: 1px solid deepskyblue;
   }
@@ -72,6 +71,30 @@ export const StyledInput = styled.input<{ error?: boolean, success?: boolean }>`
 
             &::-webkit-inner-spin-button {
               display: none;
+            }
+          `}
+
+`;
+export const InputWrapper = styled.div<{opening?: boolean ,closing?: boolean ,dash?: boolean  }>`
+  display: inline-block;
+  ${({opening = false}) =>
+          opening && css`
+            margin-left: 10px;
+            &::before {
+              
+              content: '(';
+            }
+          `}
+  ${({closing = false}) =>
+          closing && css`
+            &::before {
+              content: ') -';
+            }
+          `}
+  ${({dash = false}) =>
+          dash && css`
+            &::before {
+              content: '-';
             }
           `}
 

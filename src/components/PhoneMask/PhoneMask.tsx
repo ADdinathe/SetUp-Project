@@ -1,18 +1,21 @@
-//TODO: стиль на скрол в списке; -hz kak ego delat
-//  всякие оптимизации реактовские и причесать код
+//TODO: причесать код,
+// подумать над оптимизацией
+// проверка правильности ввода даных
 import React, {useRef, useState} from 'react';
 import './PhoneMask.css';
 import {COUNTRIES} from './config';
-import {Meta} from "../../utils/meta";
+import {Meta} from "utils/meta";
 import {
+    ErrorPic,
     MainForm,
     MainMask,
     StyledErrorBlock,
+    StyledInput,
     StyledLabel,
-    StyledSuccessBlock,
-    StyledSelect,
     StyledOption,
-    StyledInput, ErrorPic
+    StyledSelect,
+    StyledSuccessBlock,
+    InputWrapper
 } from "./PhoneMask.styles";
 
 type PhoneMaskProps = {
@@ -62,8 +65,6 @@ const PhoneMask: React.FC<PhoneMaskProps> = ({disabled}) => {
                 if (index > 0) {
                     revealRef.current[index - 1].focus()
                     revealRef.current[index - 1].select();
-                    // inputRefs[index - 1].focus();
-                    // inputRefs[index - 1].select();
                 }
             }
         }
@@ -83,10 +84,9 @@ const PhoneMask: React.FC<PhoneMaskProps> = ({disabled}) => {
             if (undefined !== event.target.dataset.index) {
 
                 const index = +event.target.dataset.index;
-                if (index > 0 && values[index]=='') {
+                if (index > 0 && values[index] == '') {
                     setValues(values.map((n, i) => (i === index ? '' : n)));
                     revealRef.current[index - 1].focus()
-                    // revealRef.current[index - 1].select();
                 }
             }
         }
@@ -133,168 +133,31 @@ const PhoneMask: React.FC<PhoneMaskProps> = ({disabled}) => {
                         </>
                     ))}
                 </StyledSelect>
-                (
-                <StyledInput
-                    error={style === Meta.error}
-                    success={style === Meta.success}
-                    key={0}
-                    disabled={disabled}
-                    value={values[0]}
-                    type="number"
-                    data-index={0}
-                    max="10"
-                    tabIndex={2}
+                {values.map((n, i) => (
 
-                    ref={myRefs}
-                    onChange={onChange}
-                    onKeyDown={handleKeyDown}
-                />
-                <StyledInput
-                    error={style === Meta.error}
-                    success={style === Meta.success}
-                    key={1}
-                    disabled={disabled}
-                    value={values[1]}
-                    type="number"
-                    data-index={1}
-                    max="10"
-                    tabIndex={3}
-                    ref={myRefs}
-                    onChange={onChange}
-                    onKeyDown={handleKeyDown}
-                />
+                    <InputWrapper
+                        opening={i == 0}
+                        closing={i == 3}
+                        dash={i == 6 || i == 8}>
 
-                <StyledInput
-                    error={style === Meta.error}
-                    success={style === Meta.success}
-                    key={2}
-                    disabled={disabled}
-                    value={values[2]}
-                    type="number"
-                    data-index={2}
-                    max="10"
-                    tabIndex={4}
-                    ref={myRefs}
-                    onChange={onChange}
-                    onKeyDown={handleKeyDown}
-                />
-                ) -
-                <StyledInput
-                    error={style === Meta.error}
-                    success={style === Meta.success}
-                    key={3}
-                    disabled={disabled}
-                    value={values[3]}
-                    type="number"
-                    data-index={3}
-                    max="10"
-                    tabIndex={5}
-                    ref={myRefs}
-                    onChange={onChange}
-                    onKeyDown={handleKeyDown}
-                />
-                <StyledInput
-                    error={style === Meta.error}
-                    success={style === Meta.success}
-                    key={4}
-                    disabled={disabled}
-                    value={values[4]}
-                    type="number"
-                    data-index={4}
-                    max="10"
-                    tabIndex={6}
-                    ref={myRefs}
-                    onChange={onChange}
-                    onKeyDown={handleKeyDown}
-                />
-                <StyledInput
-                    error={style === Meta.error}
-                    success={style === Meta.success}
-                    key={5}
-                    disabled={disabled}
-                    value={values[5]}
-                    type="number"
-                    data-index={5}
-                    max="10"
-                    tabIndex={7}
-                    ref={myRefs}
-                    onChange={onChange}
-                    onKeyDown={handleKeyDown}
-                />-
-                <StyledInput
-                    error={style === Meta.error}
-                    success={style === Meta.success}
-                    key={6}
-                    disabled={disabled}
-                    value={values[6]}
-                    type="number"
-                    data-index={6}
-                    max="10"
-                    tabIndex={8}
-                    ref={myRefs}
-                    onChange={onChange}
-                    onKeyDown={handleKeyDown}
-                />
-                <StyledInput
-                    error={style === Meta.error}
-                    success={style === Meta.success}
-                    key={7}
-                    disabled={disabled}
-                    value={values[7]}
-                    type="number"
-                    data-index={7}
-                    max="10"
-                    tabIndex={9}
-                    ref={myRefs}
-                    onChange={onChange}
-                    onKeyDown={handleKeyDown}
-                />-
-                <StyledInput
-                    error={style === Meta.error}
-                    success={style === Meta.success}
-                    key={8}
-                    disabled={disabled}
-                    value={values[8]}
-                    type="number"
-                    data-index={8}
-                    max="10"
-                    tabIndex={10}
-                    ref={myRefs}
-                    onChange={onChange}
-                    onKeyDown={handleKeyDown}
-                />
-                <StyledInput
-                    error={style === Meta.error}
-                    success={style === Meta.success}
-                    key={9}
-                    disabled={disabled}
-                    value={values[9]}
-                    type="number"
-                    data-index={9}
-                    max="10"
-                    tabIndex={11}
-                    ref={myRefs}
-                    onChange={onChange}
-                    onKeyDown={handleKeyDown}
-                />
+                        <StyledInput
+                            error={style === Meta.error}
+                            success={style === Meta.success}
 
-                {/*{values.map((n, i) => (*/}
-                {/*    */}
-                {/*    <StyledInput*/}
-                {/*        error={style === Meta.error}*/}
-                {/*        success={style === Meta.success}*/}
-                {/*        key={i}*/}
-                {/*        disabled={disabled}*/}
-                {/*        value={values[i]}*/}
-                {/*        type="number"*/}
-                {/*        data-index={i}*/}
-                {/*        max="10"*/}
-                {/*        tabIndex={i + 2}*/}
-                {/*        ref={(input) => (inputRefs[i] = input as HTMLInputElement)}*/}
-                {/*        onChange={onChange}*/}
-                {/*        onKeyDown={handleKeyDown}*/}
-                {/*    />*/}
-                {/*))}*/}
+                            key={i}
+                            disabled={disabled}
+                            value={values[i]}
+                            type="number"
+                            data-index={i}
+                            max="10"
+                            tabIndex={i + 2}
+                            ref={myRefs}
+                            onChange={onChange}
+                            onKeyDown={handleKeyDown}
+                        />
+                    </InputWrapper>
+
+                ))}
             </MainMask>
             {style === Meta.error && (<ErrorPic>
                     <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
