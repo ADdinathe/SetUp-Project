@@ -1,5 +1,3 @@
-//TODO: причесать код,
-// подумать над оптимизацией
 import React, { useRef, useState } from 'react';
 import './PhoneMask.css';
 import { COUNTRIES } from './config';
