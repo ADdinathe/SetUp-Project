@@ -1,7 +1,7 @@
-import styled, {css} from 'styled-components';
-import './PhoneMask.css'
+import styled, { css } from 'styled-components';
+import './PhoneMask.css';
 
-export const StyledInput = styled.input<{ error?: boolean, success?: boolean }>`
+export const StyledInput = styled.input<{ error?: boolean; success?: boolean }>`
   -moz-appearance: textfield;
   font-size: 14px;
   line-height: 20px;
@@ -11,10 +11,10 @@ export const StyledInput = styled.input<{ error?: boolean, success?: boolean }>`
   margin: 5px;
   overflow: hidden;
   padding: 10px 8px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 8px;
   border: 1px solid gray;
-  
+
   &:hover {
     border: 1px solid deepskyblue;
   }
@@ -26,78 +26,87 @@ export const StyledInput = styled.input<{ error?: boolean, success?: boolean }>`
   }
 
   &:disabled {
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), #C2C9D1;
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.75),
+        rgba(255, 255, 255, 0.75)
+      ),
+      #c2c9d1;
   }
 
   &::-webkit-inner-spin-button {
     display: none;
   }
 
-  ${({error = false}) =>
-          error &&
-          css`
-            -moz-appearance: textfield;
-            font-size: 14px;
-            line-height: 20px;
-            width: 32px;
-            height: 40px;
-            position: relative;
-            margin: 5px;
-            overflow: hidden;
-            padding: 10px 8px;
-            background: #FFFFFF;
-            border-radius: 8px;
-            border: 1px solid #F03738;
+  ${({ error = false }) =>
+    error &&
+    css`
+      -moz-appearance: textfield;
+      font-size: 14px;
+      line-height: 20px;
+      width: 32px;
+      height: 40px;
+      position: relative;
+      margin: 5px;
+      overflow: hidden;
+      padding: 10px 8px;
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #f03738;
 
-            &::-webkit-inner-spin-button {
-              display: none;
-            }
-          `}
-  ${({success = false}) =>
-          success &&
-          css`
-            -moz-appearance: textfield;
-            font-size: 14px;
-            line-height: 20px;
-            width: 32px;
-            height: 40px;
-            position: relative;
-            margin: 5px;
-            overflow: hidden;
-            padding: 10px 8px;
-            background: #FFFFFF;
-            border-radius: 8px;
-            border: 1px solid #3CC13B;
+      &::-webkit-inner-spin-button {
+        display: none;
+      }
+    `}
+  ${({ success = false }) =>
+    success &&
+    css`
+      -moz-appearance: textfield;
+      font-size: 14px;
+      line-height: 20px;
+      width: 32px;
+      height: 40px;
+      position: relative;
+      margin: 5px;
+      overflow: hidden;
+      padding: 10px 8px;
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #3cc13b;
 
-            &::-webkit-inner-spin-button {
-              display: none;
-            }
-          `}
-
+      &::-webkit-inner-spin-button {
+        display: none;
+      }
+    `}
 `;
-export const InputWrapper = styled.div<{opening?: boolean ,closing?: boolean ,dash?: boolean  }>`
+export const InputWrapper = styled.div<{
+  opening?: boolean;
+  closing?: boolean;
+  dash?: boolean;
+}>`
   display: inline-block;
-  ${({opening = false}) =>
-          opening && css`
-            margin-left: 10px;
-            &::before {
-              
-              content: '(';
-            }
-          `}
-  ${({closing = false}) =>
-          closing && css`
-            &::before {
-              content: ') -';
-            }
-          `}
-  ${({dash = false}) =>
-          dash && css`
-            &::before {
-              content: '-';
-            }
-          `}
-
+  ${({ opening = false }) =>
+    opening &&
+    css`
+      margin-left: 10px;
+      &::before {
+        content: '(';
+      }
+    `}
+  ${({ closing = false }) =>
+    closing &&
+    css`
+      &::before {
+        content: ') -';
+      }
+    `}
+  ${({ dash = false }) =>
+    dash &&
+    css`
+      &::before {
+        content: '-';
+      }
+    `}
 `;
 
 export const StyledSelect = styled.select`
@@ -117,7 +126,7 @@ export const StyledSelect = styled.select`
   &::-webkit-scrollbar {
     width: 4px;
     height: 212px;
-    background: #FFFFFF;
+    background: #ffffff;
     border: 1px solid rgba(196, 196, 196, 0.2);
   }
 
@@ -132,12 +141,9 @@ export const StyledSelect = styled.select`
   }
 
   &::-webkit-scrollbar-thumb {
-    
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
-
   }
-
 
   &:hover {
     border: 1px solid deepskyblue;
@@ -149,9 +155,13 @@ export const StyledSelect = styled.select`
   }
 
   &:disabled {
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), #C2C9D1;
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.75),
+        rgba(255, 255, 255, 0.75)
+      ),
+      #c2c9d1;
   }
-
 `;
 export const StyledOption = styled.option`
   font-size: 12px;
@@ -166,7 +176,12 @@ export const StyledOption = styled.option`
   }
 
   &:focus {
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), rgba(62, 102, 251, 0.25);
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0.5)
+      ),
+      rgba(62, 102, 251, 0.25);
   }
 `;
 
@@ -215,7 +230,6 @@ export const StyledSuccessBlock = styled.div`
   //  content: url("./Vector-succes.svg");
   //  padding-right: 0.5rem;
   //}
-
 `;
 export const ErrorPic = styled.div`
   margin-left: 5px;
@@ -223,5 +237,4 @@ export const ErrorPic = styled.div`
   flex-direction: row;
   align-items: baseline;
   justify-content: flex-start;
-
 `;
