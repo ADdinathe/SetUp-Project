@@ -1,9 +1,12 @@
 import React from 'react';
-import 'styles/App.scss';
+import styled from 'styled-components';
 
-import {Status} from 'utils/meta';
-import styled from "styled-components";
+import 'styles/styles.scss';
+import { Status } from 'utils/meta';
 
+import errorIcon from './Vector-error.svg';
+
+// TODO: вынести в файл StatusBlock.styles.ts, назвать папку StatusBlock, картинки положить в StatusBlock/img, лишние иконки удалить
 const ErrorPic = styled.div`
   margin-left: 5px;
   display: flex;
@@ -11,6 +14,7 @@ const ErrorPic = styled.div`
   align-items: baseline;
   justify-content: flex-start;
 `;
+
 const StyledErrorBlock = styled.div`
   margin-top: 0.6rem;
   margin-left: 5px;
@@ -18,33 +22,35 @@ const StyledErrorBlock = styled.div`
   line-height: 16px;
   color: rgba(0, 0, 0, 0.5);
 
-  //&::before {
-  //  content: " ";
-  //  background-image: url("./Vector-error.svg");
-  //  height: 15px;
-  //  width: 13px;
-  //  padding-right: 0.5rem;
-  //}
+  &::before {
+    content: '';
+    background: url(${errorIcon}) no-repeat center / contain;
+    height: 15px;
+    width: 13px;
+    padding-right: 0.5rem;
+  }
 `;
+
 const StyledSuccessBlock = styled.div`
   margin-top: 0.6rem;
   margin-left: 5px;
   font-size: 12px;
   line-height: 16px;
   color: rgba(0, 0, 0, 0.5);
-
+    
+  // TODO: импортнуть иконку
   //&::before {
   //  content: url("./Vector-succes.svg");
   //  padding-right: 0.5rem;
   //}
 `;
+
 type StatusBlockProps = {
-    style: string
+    style: string;
 };
 
 const StatusBlock: React.FC<StatusBlockProps> = ({style}) => {
-    if (style === Status.success){
-
+    if (style === Status.success) {
         return (<ErrorPic>
             <svg
                 width="14"
@@ -60,23 +66,14 @@ const StatusBlock: React.FC<StatusBlockProps> = ({style}) => {
             </svg>
             <StyledSuccessBlock>Номер телефона введен верно</StyledSuccessBlock>
         </ErrorPic>)
-    } else if (style === Status.error){
+    }
+
+    if (style === Status.error) {
         return (<ErrorPic>
-            <svg
-                width="16"
-                height="13"
-                viewBox="0 0 16 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <path
-                    d="M0.666656 13H15.3333L7.99999 0.333313L0.666656 13ZM8.66666 11H7.33332V9.66665H8.66666V11ZM8.66666 8.33331H7.33332V5.66665H8.66666V8.33331Z"
-                    fill="#F03738"
-                />
-            </svg>
             <StyledErrorBlock>Неправильный номер телефона</StyledErrorBlock>
         </ErrorPic>)
     }
+
     return null;
 }
 

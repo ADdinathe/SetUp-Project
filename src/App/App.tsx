@@ -1,8 +1,8 @@
 import React from 'react';
+
 import PhoneMask from 'components/PhoneMask';
 
-function App() {
-  return <PhoneMask disabled={false} />;
-}
+// TODO: в стейте App хранить, задизейблен инпут или нет + сделать кнопку для переключения состояний
+const App: React.FC = () => <PhoneMask disabled={false} />;
 
 export default App;

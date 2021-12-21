@@ -1,7 +1,7 @@
 import styled, {css} from 'styled-components';
-import 'styles/App.scss';
+import 'styles/styles.scss';
 
-export const StyledInput = styled.input<{ error?: boolean; success?: boolean }>`
+export const StyledInput = styled.input.attrs({ type: 'number' })<{ error?: boolean; success?: boolean }>`
   -moz-appearance: textfield;
   font-size: 14px;
   line-height: 20px;
@@ -48,6 +48,7 @@ export const StyledInput = styled.input<{ error?: boolean; success?: boolean }>`
             border: 1px solid #3cc13b;
           `}
 `;
+
 export const InputWrapper = styled.div<{
     opening?: boolean;
     closing?: boolean;

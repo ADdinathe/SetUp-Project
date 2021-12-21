@@ -1,106 +1,112 @@
-import React, {useRef, useState} from 'react';
-import 'styles/App.scss';
-import {COUNTRIES} from './config';
-import {Status} from 'utils/meta';
-import {
-    MainForm,
-    MainMask,
-    StyledInput,
-    StyledLabel,
-    InputWrapper,
-} from './PhoneMask.styles';
-import StatusBlock from "../ErrorPic";
-import CustomSelect from "../CustomSelect";
+import * as React from 'react';
+
+import 'styles/styles.scss';
+import { Status } from 'utils/meta';
+
+import StatusBlock from '../ErrorPic';
+import CustomSelect from '../CustomSelect';
+
+// TODO: установить prettier и eslint
+import { COUNTRIES } from './config';
+import { InputWrapper, MainForm, MainMask, StyledInput, StyledLabel } from './PhoneMask.styles';
+// TODO: сделать свой хук
+// import usePhoneMask from './usePhoneMask';
 
 type PhoneMaskProps = {
     disabled: boolean;
 };
 
-const PhoneMask: React.FC<PhoneMaskProps> = ({disabled}) => {
-    const [countryCode, setCountryCode] = useState(COUNTRIES[0].label);
-    const [values, setValues] = React.useState(Array(10).fill(''));
-    const [style, setStyle] = useState<string>('input');
-    const revealRef = useRef<HTMLInputElement[]>(Array(10));
+const PhoneMask: React.FC<PhoneMaskProps> = ({ disabled }: PhoneMaskProps) => {
+    // TODO: хранить индекс в массиве, а не лейбл
+    const [countryCode, setCountryCode] = React.useState(COUNTRIES[0].label);
 
-    const phoneCheck = (phoneNum: string) => {
-        let result = phoneNum.match(/[0-9]{10}/g);
+    const [values, setValues] = React.useState(Array(10).fill(''));
+    // TODO: более говорящее название, например, valuesRef
+    const revealRef = React.useRef<HTMLInputElement[]>(Array(10));
+
+    // TODO: более говорящее название, например, inputStatus
+    const [style, setStyle] = React.useState(Status.default);
+
+    // TODO: вынести в utils/validate.ts, добавить в аргументы коллбэки onSuccess: VoidFunction, onError: VoidFunction
+    const phoneCheck = (phoneNum: string): boolean => {
+        const result = phoneNum.match(/[0-9]{10}/g);
+
         if (phoneNum.length == 10 && result) {
-            setStyle('success');
+            setStyle(Status.success);
             return true;
         }
-        setStyle('error');
+
+        setStyle(Status.error);
         return false;
     };
-    const shiftAndDash = (index: number, dash: number) => {
+
+    const shiftAndDash = React.useCallback((index: number, dash: number) => {
         revealRef.current[index + dash].focus();
         revealRef.current[index + dash].select();
-    }
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
-        if (!(event.target instanceof HTMLElement)) {
-            return;
-        }
+    }, [revealRef]);
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            const phoneNumber = values.join('');
-            phoneCheck(phoneNumber)
-                ? console.log(countryCode + phoneNumber)
-                : console.log('error');
-
+            phoneCheck(values.join(''));
             return;
         }
-        const index = Number(event.target.dataset.index);
-        switch (event.key) {
 
+        const index = Number((event.target as HTMLInputElement).dataset?.index);
+
+        switch (event.key) {
+            // TODO: фигурные скобки в switch case + enum для значений кнопок
             case 'ArrowLeft':
                 if (index > 0) {
                     shiftAndDash(index, -1)
                 }
                 break;
             case 'ArrowRight':
-                if (index < values.length - 1) {
+                if (index < 9) {
                     shiftAndDash(index, 1)
                 }
                 break;
             case 'Backspace':
-                if (index > 0 && values[index] == '') {
-                    setValues(values.map((n, i) => (i === index ? '' : n)));
-                    revealRef.current[index - 1].focus();
+                if (index > 0 && !values[index]) {
+                    // TODO: сделать лучше
+                    setValues(values => values.map((v, i) => (i === index ? '' : v)));
+                    shiftAndDash(index, -1);
                 }
                 break;
             case 'Delete':
-                if (index < values.length - 1) {
+                if (index < 9) {
                     shiftAndDash(index, 1)
                 }
                 break;
         }
     };
+
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.dataset.index !== undefined) {
             const index = Number(event.target.dataset.index);
             const value = event.target.value;
 
-            setValues(
-                values.map((n, i) => (i === index ? value.slice(0, 1) : n))
+            setValues(values =>
+                values.map((v, i) => (i === index ? value.slice(0, 1) : v))
             );
 
-            if (index < values.length - 1 && value) {
+            if (index < 9 && value) {
                 shiftAndDash(index, 1)
             }
         }
     };
-    const ChosenCountrySetter = (chosenCountry: string) => {
-        setCountryCode(chosenCountry);
-    }
+
     return (
         <MainForm>
             <StyledLabel>Введите номер телефона</StyledLabel>
             <MainMask>
                 <CustomSelect
-                    create={ChosenCountrySetter}
+                    create={setCountryCode}
+                    // TODO: таб индекс для дропдауна
+                    // TODO: один пропс status вместо error и success
                     error={style === Status.error}
                     success={style === Status.success}
                 />
-
-                {values.map((n, i) => (
+                {values.map((v, i) => (
                     <InputWrapper
                         key={i}
                         opening={i == 0}
@@ -108,16 +114,15 @@ const PhoneMask: React.FC<PhoneMaskProps> = ({disabled}) => {
                         dash={i == 6 || i == 8}
                     >
                         <StyledInput
+                            // TODO: один пропс status
                             error={style === Status.error}
                             success={style === Status.success}
                             disabled={disabled}
-                            value={values[i]}
-                            type="number"
+                            value={v}
                             data-index={i}
-                            max="9"
                             tabIndex={i + 2}
-                            ref={(el) => {
-                                revealRef.current[i] = el as HTMLInputElement
+                            ref={(el: HTMLInputElement) => {
+                                revealRef.current[i] = el
                             }}
                             onChange={onChange}
                             onKeyDown={handleKeyDown}
@@ -125,8 +130,10 @@ const PhoneMask: React.FC<PhoneMaskProps> = ({disabled}) => {
                     </InputWrapper>
                 ))}
             </MainMask>
-            <StatusBlock style={style}/>
-
+            <StatusBlock
+              // TODO: перенести компоненты STatusBlock и CustomSelect в PhoneMask/components
+                // TODO: пропс status
+            style={style}/>
         </MainForm>
     );
 };

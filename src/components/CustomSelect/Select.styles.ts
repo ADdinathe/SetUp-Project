@@ -1,5 +1,5 @@
 import styled, {css} from "styled-components";
-import 'styles/App.scss';
+import 'styles/styles.scss';
 
 export const StyledSelectWrapper = styled.div`
   display: inline-block;
