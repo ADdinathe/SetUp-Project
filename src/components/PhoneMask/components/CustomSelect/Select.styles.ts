@@ -1,13 +1,17 @@
-import styled, {css} from "styled-components";
+import styled, { css } from 'styled-components';
+
 import 'styles/styles.scss';
+import { Status } from '../../../../types/types';
 
 export const StyledSelectWrapper = styled.div`
   display: inline-block;
-  //width: 300px;
-  //margin: 3% auto;
 `;
 
-export const StyledSelectedWrapper = styled.div<{ error?: boolean; success?: boolean }>`
+export const StyledSelectedWrapper = styled.div<{
+  status: Status;
+  disabled: boolean;
+}>`
+  cursor: default;
   width: auto;
   padding: 0 0.3rem;
   display: flex;
@@ -26,26 +30,29 @@ export const StyledSelectedWrapper = styled.div<{ error?: boolean; success?: boo
     outline: none;
   }
 
-  &:disabled {
-    background: linear-gradient(0deg,
-    rgba(255, 255, 255, 0.75),
-    rgba(255, 255, 255, 0.75)),
-    #c2c9d1;
-  }
-
-  ${({success = false}) =>
-          success &&
-          css`
-            border: 1px solid #3cc13b;
-
-          `}
-
-  ${({error = false}) =>
-          error &&
-          css`
-            border: 1px solid #f03738;
-          `}
-
+  ${({ disabled = false }) =>
+    disabled &&
+    css`
+      background: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.75),
+          rgba(255, 255, 255, 0.75)
+        ),
+        #c2c9d1;
+    `}
+  ${({ status }) =>
+    status === Status.success
+      ? css`
+          border: 1px solid #3cc13b;
+        `
+      : status === Status.error
+      ? css`
+          border: 1px solid #f03738;
+        `
+      : css`
+          border: 1px solid rgba(194, 201, 209, 1);
+        `}
+}
 `;
 
 export const StyledSelected = styled.div`
@@ -54,15 +61,10 @@ export const StyledSelected = styled.div`
   padding: 10px 7px;
   width: auto;
   height: 40px;
-  position: relative;
   overflow: hidden;
-  background: #fff;
-
-
-
 `;
 
-export const DropDownListContainer = styled("div")`
+export const DropDownListContainer = styled.div`
   position: absolute;
   z-index: 100;
   width: 10.5em;
@@ -70,9 +72,11 @@ export const DropDownListContainer = styled("div")`
 `;
 
 export const ListContainer = styled.ul`
+  cursor: default;
   max-height: 20rem;
+  width: 13rem;
   overflow-y: scroll;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 8px;
   overflow-x: hidden;
   list-style: none;
@@ -106,6 +110,11 @@ export const ListItem = styled.li`
   margin: 3% auto;
 
   &:hover {
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), rgba(62, 102, 251, 0.25);
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0.5)
+      ),
+      rgba(62, 102, 251, 0.25);
   }
 `;

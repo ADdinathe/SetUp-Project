@@ -71,7 +71,12 @@ module.exports = {
         use: 'babel-loader',
       },
       {
+        test: /_.svg$/,
+        use: ['@svgr/webpack'],
+      },
+      {
         test: /\.(png|svg|jpg)$/,
+        exclude: /_.svg$/,
         type: 'asset',
         parser: {
           dataUrlCondition: {

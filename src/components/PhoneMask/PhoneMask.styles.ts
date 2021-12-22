@@ -1,7 +1,11 @@
-import styled, {css} from 'styled-components';
-import 'styles/styles.scss';
+import styled, { css } from 'styled-components';
 
-export const StyledInput = styled.input.attrs({ type: 'number' })<{ error?: boolean; success?: boolean }>`
+import 'styles/styles.scss';
+import { Status } from '../../types/types';
+
+export const StyledInput = styled.input.attrs({ type: 'number' })<{
+  status: Status;
+}>`
   -moz-appearance: textfield;
   font-size: 14px;
   line-height: 20px;
@@ -10,7 +14,7 @@ export const StyledInput = styled.input.attrs({ type: 'number' })<{ error?: bool
   position: relative;
   margin: 5px;
   overflow: hidden;
-  padding: 10px 8px;
+  padding: 10px;
   background: #ffffff;
   border-radius: 8px;
   border: 1px solid gray;
@@ -26,58 +30,61 @@ export const StyledInput = styled.input.attrs({ type: 'number' })<{ error?: bool
   }
 
   &:disabled {
-    background: linear-gradient(0deg,
-    rgba(255, 255, 255, 0.75),
-    rgba(255, 255, 255, 0.75)),
-    #c2c9d1;
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.75),
+        rgba(255, 255, 255, 0.75)
+      ),
+      #c2c9d1;
   }
 
   &::-webkit-inner-spin-button {
     display: none;
   }
 
-  ${({error = false}) =>
-          error &&
-          css`
-            border: 1px solid #f03738;
-          `}
-  
-  ${({success = false}) =>
-          success &&
-          css`
-            border: 1px solid #3cc13b;
-          `}
+  ${({ status }) =>
+    status === Status.success
+      ? css`
+          border: 1px solid #3cc13b;
+        `
+      : status === Status.error
+      ? css`
+          border: 1px solid #f03738;
+        `
+      : css`
+          border: 1px solid gray;
+        `}
 `;
 
 export const InputWrapper = styled.div<{
-    opening?: boolean;
-    closing?: boolean;
-    dash?: boolean;
+  opening?: boolean;
+  closing?: boolean;
+  dash?: boolean;
 }>`
   display: inline-block;
-  ${({opening = false}) =>
-          opening &&
-          css`
-            margin-left: 10px;
+  ${({ opening = false }) =>
+    opening &&
+    css`
+      margin-left: 10px;
 
-            &::before {
-              content: '(';
-            }
-          `}
-  ${({closing = false}) =>
-          closing &&
-          css`
-            &::before {
-              content: ') -';
-            }
-          `}
-  ${({dash = false}) =>
-          dash &&
-          css`
-            &::before {
-              content: '-';
-            }
-          `}
+      &::before {
+        content: '(';
+      }
+    `}
+  ${({ closing = false }) =>
+    closing &&
+    css`
+      &::before {
+        content: ') -';
+      }
+    `}
+  ${({ dash = false }) =>
+    dash &&
+    css`
+      &::before {
+        content: '-';
+      }
+    `}
 `;
 
 export const MainForm = styled.div`
@@ -100,5 +107,3 @@ export const StyledLabel = styled.label`
   font-size: 12px;
   line-height: 16px;
 `;
-
-
