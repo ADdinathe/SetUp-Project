@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
-import 'styles/styles.scss';
-import errorIcon from './img/Vector-error.svg';
-import successIcon from './img/Vector-succes.svg';
+import colors from 'styles/colors';
+
+import errorIcon from './img/error.svg';
+import successIcon from './img/succes.svg';
+
 export const ErrorPic = styled.div`
   margin-left: 5px;
   display: flex;
@@ -16,14 +18,12 @@ export const StyledErrorBlock = styled.div`
   margin-left: 5px;
   font-size: 12px;
   line-height: 16px;
-  color: rgba(0, 0, 0, 0.5);
+  color: ${colors.halfVisible};
 
   &::before {
-    position: relative;
-    top: 3px;
-    left: 0;
-    content: url(${errorIcon});
-    padding-right: 0.5rem;
+    background: url(${errorIcon}) no-repeat;
+    content: '';
+    padding-right: 1.3rem;
   }
 `;
 
@@ -33,13 +33,11 @@ export const StyledSuccessBlock = styled.div`
   margin-left: 5px;
   font-size: 12px;
   line-height: 16px;
-  color: rgba(0, 0, 0, 0.5);
+  color: ${colors.halfVisible};
 
   &::before {
-    position: relative;
-    top: 3px;
-    left: 0;
-    content: url(${successIcon});
-    padding-right: 0.5rem;
+    background: url(${successIcon}) no-repeat;
+    content: '';
+    padding-right: 1.3rem;
   }
 `;

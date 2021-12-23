@@ -4,6 +4,7 @@ export enum Status {
   error = 'error', //Done NOT Well
   success = 'success', //Done well
 }
+
 export enum KeyCodes {
   ArrowLeft = 'ArrowLeft',
   ArrowRight = 'ArrowRight',

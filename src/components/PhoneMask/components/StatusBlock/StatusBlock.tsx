@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-import 'styles/styles.scss';
-import { Status } from '../../../../types/types';
+import { Status } from 'types/types';
 
 import {
   ErrorPic,
@@ -13,7 +12,9 @@ type StatusBlockProps = {
   status: string;
 };
 
-const StatusBlock: React.FC<StatusBlockProps> = ({ status }) => {
+const StatusBlock: React.FC<StatusBlockProps> = ({
+  status,
+}: StatusBlockProps) => {
   if (status === Status.success) {
     return (
       <ErrorPic>

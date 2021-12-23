@@ -2,10 +2,10 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "types/": ["/types/*"],
       "components/": ["/components/*"],
       "config/": ["/config/*"],
       "styles/": ["/styles/*"],
+      "types/": ["/types/*"],
       "utils/": ["/utils/*"]
     },
     "noEmit": true,

@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-import { COUNTRIES } from '../../components/PhoneMask/config';
-import { KeyCodes, Status } from '../../types/types';
-import { phoneCheck } from '../../utils/validate';
+import { KeyCodes, Status } from 'types/types';
+import { phoneCheck } from 'utils/validate';
 
 export const usePhoneMask = () => {
   const [countryCode, setCountryCode] = React.useState(0);
@@ -26,9 +25,8 @@ export const usePhoneMask = () => {
         values.join(''),
         () => setInputStatus(Status.success),
         () => setInputStatus(Status.error)
-      )
-        ? console.log(COUNTRIES[countryCode].code + values.join(''))
-        : console.log('error');
+      );
+
       return;
     }
 
@@ -82,7 +80,6 @@ export const usePhoneMask = () => {
   return {
     setCountryCode,
     inputStatus,
-    setInputStatus,
     values,
     handleKeyDown,
     valuesRef,

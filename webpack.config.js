@@ -89,6 +89,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.jsx', '.js', '.ts'],
     alias: {
+      types: path.join(srcPath, 'types'),
       components: path.join(srcPath, 'components'),
       config: path.join(srcPath, 'config'),
       styles: path.join(srcPath, 'styles'),

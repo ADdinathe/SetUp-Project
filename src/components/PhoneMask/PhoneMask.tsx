@@ -1,9 +1,5 @@
 import * as React from 'react';
 
-import 'styles/styles.scss';
-
-import { usePhoneMask } from '../../store/hook/usePhoneMask';
-
 import {
   InputWrapper,
   MainForm,
@@ -14,23 +10,32 @@ import {
 import CustomSelect from './components/CustomSelect/Select';
 import StatusBlock from './components/StatusBlock/StatusBlock';
 import { COUNTRIES } from './config';
+import { usePhoneMask } from './usePhoneMask';
 
 type PhoneMaskProps = {
   disabled: boolean;
 };
 
 const PhoneMask: React.FC<PhoneMaskProps> = ({ disabled }: PhoneMaskProps) => {
-  const PhoneMaskFunc = usePhoneMask();
+  const {
+    setCountryCode,
+    inputStatus,
+    values,
+    handleKeyDown,
+    valuesRef,
+    onChange,
+  } = usePhoneMask();
+
   return (
     <MainForm>
       <StyledLabel>Введите номер телефона</StyledLabel>
       <MainMask>
         <CustomSelect
           disabled={disabled}
-          onSelect={PhoneMaskFunc.setCountryCode}
-          status={PhoneMaskFunc.inputStatus}
+          onSelect={setCountryCode}
+          status={inputStatus}
         />
-        {PhoneMaskFunc.values.map((v, i) => (
+        {values.map((v, i) => (
           <InputWrapper
             key={i}
             opening={i == 0}
@@ -38,21 +43,21 @@ const PhoneMask: React.FC<PhoneMaskProps> = ({ disabled }: PhoneMaskProps) => {
             dash={i == 6 || i == 8}
           >
             <StyledInput
-              status={PhoneMaskFunc.inputStatus}
+              status={inputStatus}
               disabled={disabled}
               value={v}
               data-index={i}
               tabIndex={i + COUNTRIES.length}
               ref={(el: HTMLInputElement) => {
-                PhoneMaskFunc.valuesRef.current[i] = el;
+                valuesRef.current[i] = el;
               }}
-              onChange={PhoneMaskFunc.onChange}
-              onKeyDown={PhoneMaskFunc.handleKeyDown}
+              onChange={onChange}
+              onKeyDown={handleKeyDown}
             />
           </InputWrapper>
         ))}
       </MainMask>
-      <StatusBlock status={PhoneMaskFunc.inputStatus} />
+      <StatusBlock status={inputStatus} />
     </MainForm>
   );
 };

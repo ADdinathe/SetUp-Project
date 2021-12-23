@@ -4,8 +4,6 @@ import { Status } from 'types/types';
 
 import { COUNTRIES } from '../../config';
 
-import 'styles/styles.scss';
-
 import {
   StyledSelectWrapper,
   StyledSelectedWrapper,
@@ -14,7 +12,7 @@ import {
   ListContainer,
   ListItem,
 } from './Select.styles';
-import Star from './img/Vector_.svg';
+import Star from './img/vector_.svg';
 
 type CustomSelectProps = {
   disabled: boolean;
@@ -28,22 +26,20 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   status,
 }: CustomSelectProps) => {
   const [countryCode, setCountryCode] = React.useState(
-    COUNTRIES[0].flag + ' ' + COUNTRIES[0].code
+    `${COUNTRIES[0].flag} ${COUNTRIES[0].code}`
   );
 
-  const [visible, setvisible] = React.useState(false);
+  const [visible, setVisible] = React.useState(false);
 
-  const toggling = () => {
-    setvisible(false);
-  };
-
-  React.useEffect(() => {}, [visible]);
+  const toggle = React.useCallback(() => {
+    setVisible(false);
+  }, []);
   React.useEffect(() => {
     if (visible) {
-      window.addEventListener('click', toggling);
+      window.addEventListener('click', toggle);
     }
     return () => {
-      window.removeEventListener('click', toggling);
+      window.removeEventListener('click', toggle);
     };
   }, [visible]);
 
@@ -52,7 +48,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
       <StyledSelectedWrapper
         disabled={disabled}
         tabIndex={1}
-        onClick={() => setvisible((visible) => !visible)}
+        onClick={() => setVisible((visible) => !visible)}
         status={status}
       >
         <StyledSelected>{countryCode}</StyledSelected>
@@ -67,12 +63,12 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
                 tabIndex={index + 1}
                 key={index}
                 onClick={() => {
-                  setCountryCode(i.flag + ' ' + i.code);
+                  setCountryCode(`${i.flag}  ${i.code}`);
                   onSelect(index);
-                  setvisible(false);
+                  toggle();
                 }}
               >
-                {i.flag + ' ' + i.code + ' ' + i.country}
+                {`${i.flag} ${i.code} ${i.country}`}
               </ListItem>
             ))}
           </ListContainer>

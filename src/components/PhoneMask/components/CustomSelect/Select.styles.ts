@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import 'styles/styles.scss';
-import { Status } from '../../../../types/types';
+import colors from 'styles/colors';
+import { Status } from 'types/types';
 
 export const StyledSelectWrapper = styled.div`
   display: inline-block;
@@ -18,7 +18,7 @@ export const StyledSelectedWrapper = styled.div<{
   flex-direction: row;
   align-items: baseline;
   justify-content: center;
-  border: 1px solid rgba(194, 201, 209, 1);
+  border: 1px solid ${colors.borderColor};
   border-radius: 8px;
 
   &:hover {
@@ -50,7 +50,7 @@ export const StyledSelectedWrapper = styled.div<{
           border: 1px solid #f03738;
         `
       : css`
-          border: 1px solid rgba(194, 201, 209, 1);
+          border: 1px solid ${colors.borderColor};
         `}
 }
 `;
@@ -68,7 +68,7 @@ export const DropDownListContainer = styled.div`
   position: absolute;
   z-index: 100;
   width: 10.5em;
-  color: black;
+  color: ${colors.Black};
 `;
 
 export const ListContainer = styled.ul`
@@ -86,7 +86,7 @@ export const ListContainer = styled.ul`
     width: 4px;
     height: 212px;
     background: #ffffff;
-    border: 1px solid rgba(196, 196, 196, 0.2);
+    border: 1px solid ${colors.listBorderColor};
   }
 
   &::-webkit-scrollbar-button {
@@ -95,7 +95,7 @@ export const ListContainer = styled.ul`
 
   &::-webkit-scrollbar-track {
     border-radius: 10px;
-    border: 1px solid rgba(196, 196, 196, 0.2);
+    border: 1px solid ${colors.listBorderColor};
   }
 
   &::-webkit-scrollbar-thumb {

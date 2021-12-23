@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import 'styles/styles.scss';
-import { Status } from '../../types/types';
+import colors from 'styles/colors';
+import { Status } from 'types/types';
 
 export const StyledInput = styled.input.attrs({ type: 'number' })<{
   status: Status;
@@ -17,15 +17,15 @@ export const StyledInput = styled.input.attrs({ type: 'number' })<{
   padding: 10px;
   background: #ffffff;
   border-radius: 8px;
-  border: 1px solid gray;
+  border: 1px solid ${colors.defaultColor};
 
   &:hover {
-    border: 1px solid deepskyblue;
+    border: 1px solid ${colors.inputHove_Focus};
   }
 
   &:focus {
     -moz-appearance: textfield;
-    border: 1px solid deepskyblue;
+    border: 1px solid ${colors.inputHove_Focus};
     outline: none;
   }
 
@@ -45,14 +45,14 @@ export const StyledInput = styled.input.attrs({ type: 'number' })<{
   ${({ status }) =>
     status === Status.success
       ? css`
-          border: 1px solid #3cc13b;
+          border: 1px solid ${colors.successColor};
         `
       : status === Status.error
       ? css`
-          border: 1px solid #f03738;
+          border: 1px solid ${colors.errorColor};
         `
       : css`
-          border: 1px solid gray;
+          border: 1px solid ${colors.defaultColor};
         `}
 `;
 
