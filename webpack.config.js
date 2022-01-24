@@ -71,7 +71,12 @@ module.exports = {
         use: 'babel-loader',
       },
       {
+        test: /_.svg$/,
+        use: ['@svgr/webpack'],
+      },
+      {
         test: /\.(png|svg|jpg)$/,
+        exclude: /_.svg$/,
         type: 'asset',
         parser: {
           dataUrlCondition: {
@@ -84,6 +89,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.jsx', '.js', '.ts'],
     alias: {
+      types: path.join(srcPath, 'types'),
       components: path.join(srcPath, 'components'),
       config: path.join(srcPath, 'config'),
       styles: path.join(srcPath, 'styles'),
