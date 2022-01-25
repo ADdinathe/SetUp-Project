@@ -4,6 +4,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const { template } = require('@babel/core');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const buildPath = path.resolve(__dirname, 'dist');
 const srcPath = path.resolve(__dirname, 'src');
@@ -54,6 +55,9 @@ module.exports = {
       filename: '[name]-[hash].css',
     }),
     new TsCheckerPlugin(),
+    new ESLintPlugin({
+      extensions: ['ts']
+    }),
   ].filter(Boolean),
   module: {
     rules: [

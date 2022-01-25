@@ -1,12 +1,6 @@
 import * as React from 'react';
 
-import {
-  InputWrapper,
-  MainForm,
-  MainMask,
-  StyledInput,
-  StyledLabel,
-} from './PhoneMask.styles';
+import { InputWrapper, MainForm, MainMask, StyledInput, StyledLabel } from './PhoneMask.styles';
 import CustomSelect from './components/CustomSelect/Select';
 import StatusBlock from './components/StatusBlock/StatusBlock';
 import { COUNTRIES } from './config';
@@ -17,39 +11,29 @@ type PhoneMaskProps = {
 };
 
 const PhoneMask: React.FC<PhoneMaskProps> = ({ disabled }: PhoneMaskProps) => {
-  const {
-    setCountryCode,
-    inputStatus,
-    values,
-    handleKeyDown,
-    valuesRef,
-    onChange,
-  } = usePhoneMask();
+  const { setCountryCode, inputStatus, values, handleKeyDown, valuesRef, onChange } =
+    usePhoneMask();
 
   return (
     <MainForm>
       <StyledLabel>Введите номер телефона</StyledLabel>
       <MainMask>
-        <CustomSelect
-          disabled={disabled}
-          onSelect={setCountryCode}
-          status={inputStatus}
-        />
-        {values.map((v, i) => (
+        <CustomSelect disabled={disabled} onSelect={setCountryCode} status={inputStatus} />
+        {values.map((val, index) => (
           <InputWrapper
-            key={i}
-            opening={i == 0}
-            closing={i == 3}
-            dash={i == 6 || i == 8}
+            key={index}
+            opening={index == 0}
+            closing={index == 3}
+            dash={index == 6 || index == 8}
           >
             <StyledInput
               status={inputStatus}
               disabled={disabled}
-              value={v}
-              data-index={i}
-              tabIndex={i + COUNTRIES.length}
+              value={val}
+              data-index={index}
+              tabIndex={index + COUNTRIES.length}
               ref={(el: HTMLInputElement) => {
-                valuesRef.current[i] = el;
+                valuesRef.current[index] = el;
               }}
               onChange={onChange}
               onKeyDown={handleKeyDown}

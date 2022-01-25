@@ -2,19 +2,13 @@ import * as React from 'react';
 
 import { Status } from 'types/types';
 
-import {
-  ErrorPic,
-  StyledErrorBlock,
-  StyledSuccessBlock,
-} from './StatusBlock.styles';
+import { ErrorPic, StyledErrorBlock, StyledSuccessBlock } from './StatusBlock.styles';
 
 type StatusBlockProps = {
   status: string;
 };
 
-const StatusBlock: React.FC<StatusBlockProps> = ({
-  status,
-}: StatusBlockProps) => {
+const StatusBlock: React.FC<StatusBlockProps> = ({ status }: StatusBlockProps) => {
   if (status === Status.success) {
     return (
       <ErrorPic>
