@@ -56,7 +56,7 @@ module.exports = {
     }),
     new TsCheckerPlugin(),
     new ESLintPlugin({
-      extensions: ['ts']
+      extensions: ['ts', 'js']
     }),
   ].filter(Boolean),
   module: {
