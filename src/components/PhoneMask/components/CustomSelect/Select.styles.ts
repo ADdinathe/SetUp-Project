@@ -33,11 +33,7 @@ export const StyledSelectedWrapper = styled.div<{
   ${({ disabled = false }) =>
     disabled &&
     css`
-      background: linear-gradient(
-          0deg,
-          rgba(255, 255, 255, 0.75),
-          rgba(255, 255, 255, 0.75)
-        ),
+      background: linear-gradient(0deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)),
         #c2c9d1;
     `}
   ${({ status }) =>
@@ -110,11 +106,7 @@ export const ListItem = styled.li`
   margin: 3% auto;
 
   &:hover {
-    background: linear-gradient(
-        0deg,
-        rgba(255, 255, 255, 0.5),
-        rgba(255, 255, 255, 0.5)
-      ),
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
       rgba(62, 102, 251, 0.25);
   }
 `;

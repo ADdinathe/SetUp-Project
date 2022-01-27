@@ -25,9 +25,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   onSelect,
   status,
 }: CustomSelectProps) => {
-  const [countryCode, setCountryCode] = React.useState(
-    `${COUNTRIES[0].flag} ${COUNTRIES[0].code}`
-  );
+  const [countryCode, setCountryCode] = React.useState(`${COUNTRIES[0].flag} ${COUNTRIES[0].code}`);
 
   const [visible, setVisible] = React.useState(false);
 
@@ -58,17 +56,17 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
       {visible && (
         <DropDownListContainer>
           <ListContainer>
-            {COUNTRIES.map((i, index) => (
+            {COUNTRIES.map((item, index) => (
               <ListItem
                 tabIndex={index + 1}
                 key={index}
                 onClick={() => {
-                  setCountryCode(`${i.flag}  ${i.code}`);
+                  setCountryCode(`${item.flag}  ${item.code}`);
                   onSelect(index);
                   toggle();
                 }}
               >
-                {`${i.flag} ${i.code} ${i.country}`}
+                {`${item.flag} ${item.code} ${item.country}`}
               </ListItem>
             ))}
           </ListContainer>

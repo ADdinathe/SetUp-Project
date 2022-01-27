@@ -4,7 +4,7 @@ import { KeyCodes, Status } from 'types/types';
 import { phoneCheck } from 'utils/validate';
 
 export const usePhoneMask = () => {
-  const [countryCode, setCountryCode] = React.useState(0);
+  const [, setCountryCode] = React.useState(0);
 
   const [values, setValues] = React.useState(Array(10).fill(''));
   const valuesRef = React.useRef<HTMLInputElement[]>(Array(10));
@@ -66,11 +66,9 @@ export const usePhoneMask = () => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.dataset.index !== undefined) {
       const index = Number(event.target.dataset.index);
-      const value = event.target.value;
+      const { value } = event.target;
 
-      setValues((values) =>
-        values.map((v, i) => (i === index ? value.slice(0, 1) : v))
-      );
+      setValues((values) => values.map((val, id) => (id === index ? value.slice(0, 1) : val)));
 
       if (index < 9 && value) {
         shiftAndDash(index, 1);

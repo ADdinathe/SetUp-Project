@@ -30,12 +30,7 @@ export const StyledInput = styled.input.attrs({ type: 'number' })<{
   }
 
   &:disabled {
-    background: linear-gradient(
-        0deg,
-        rgba(255, 255, 255, 0.75),
-        rgba(255, 255, 255, 0.75)
-      ),
-      #c2c9d1;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), #c2c9d1;
   }
 
   &::-webkit-inner-spin-button {

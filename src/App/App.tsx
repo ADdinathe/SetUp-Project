@@ -19,8 +19,7 @@ const StyledButton = styled.button`
   &:hover,
   &:focus {
     border-color: rgba(82, 168, 236, 0.8);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset,
-      0 0 8px rgba(82, 168, 236, 0.6);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6);
     outline: 0 none;
   }
 `;
@@ -30,9 +29,7 @@ const App: React.FC = () => {
   return (
     <>
       <PhoneMask disabled={disabled} />
-      <StyledButton onClick={() => setDisabled((visible) => !visible)}>
-        Submit
-      </StyledButton>
+      <StyledButton onClick={() => setDisabled((visible) => !visible)}>Submit</StyledButton>
     </>
   );
 };
